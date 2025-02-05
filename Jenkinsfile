@@ -12,15 +12,7 @@ pipeline {
         }
       }
     }
-    stage('Build') {
-      steps {
-        withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-          script {
-            app = docker.build("asecurityguru/testeb")
-          }
-        }
-      }
-    }
+
     stage('RunContainerScan') {
       steps {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
@@ -34,6 +26,7 @@ pipeline {
         }
       }
     }
+    
     stage('RunSnykSCA') {
       steps {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
@@ -41,6 +34,7 @@ pipeline {
         }
       }
     }
+
     stage('RunDASTUsingZAP') {
       steps {
         sh "/zap/zap.sh -port 9393 -cmd -quickurl https://www.example.com -quickprogress -quickout /zap/Output.html"
