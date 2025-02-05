@@ -5,7 +5,7 @@ pipeline {
   }
 
   stages {
-    stage('CompileandRunSonarAnalysis') {
+    stage('Compilar_y_SAST') {
       steps {
         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
           sh "mvn -Dmaven.test.failure.ignore verify sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=Jenkins-Pipeline -Dsonar.host.url=http://localhost:9000/"
@@ -13,13 +13,18 @@ pipeline {
       }
     }
 
-    stage('RunContainerScan') {
+    stage('Container_Scan') {
       steps {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
           script {
             try {
-              sh "snyk container test Dockerfile"
-            } catch (err) {
+          // Construir la imagen Docker
+          sh "docker build -t imagen_vulnerable ."
+          
+          // Ejecutar el escaneo con Snyk
+          sh "snyk container test imagen_vulnerable"
+        } catch (err) {
+
               echo err.getMessage()
             }
           }
@@ -37,7 +42,7 @@ pipeline {
 
     stage('RunDASTUsingZAP') {
       steps {
-        sh "/zap/zap.sh -port 9393 -cmd -quickurl https://www.example.com -quickprogress -quickout /zap/Output.html"
+        sh "/usr/share/zaproxy/zap.sh -port 9393 -cmd -quickurl https://www.example.com -quickprogress -quickout /usr/share/zaproxy/Output.html"
       }
     }
 
