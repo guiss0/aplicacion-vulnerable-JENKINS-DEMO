@@ -18,7 +18,7 @@ pipeline {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
           script {
             try {
-              sh "snyk container test asecurityguru/testeb"
+              sh "snyk container test Dockerfile"
             } catch (err) {
               echo err.getMessage()
             }
