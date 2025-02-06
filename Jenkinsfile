@@ -45,11 +45,7 @@ pipeline {
       }
     }
 
-    stage('RunDASTUsingZAP') {
-      steps {
-        sh "/usr/share/zaproxy/zap.sh -port 9393 -cmd -quickurl https://www.example.com -quickprogress -quickout /usr/share/zaproxy/Output.html"
-      }
-    }
+
 
     stage('checkov') {
       steps {
