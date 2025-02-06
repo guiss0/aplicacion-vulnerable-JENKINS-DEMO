@@ -47,7 +47,7 @@ pipeline {
 
 
 
-    stage('checkov_IAC') {
+    stage('Escaneo_Terraform_Trivy') {
       steps {
         sh "trivy config main.tf"
       }
