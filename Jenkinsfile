@@ -49,7 +49,7 @@ pipeline {
 
     stage('checkov_IAC') {
       steps {
-        sh "checkov -s -f main.tf"
+        sh "trivy config main.tf"
       }
     }
   }
