@@ -37,7 +37,7 @@ pipeline {
       }
     }
     
-    stage('RunSnykSCA') {
+    stage('SNYK_SCA') {
       steps {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
           sh "mvn snyk:test -fn"
@@ -47,7 +47,7 @@ pipeline {
 
 
 
-    stage('checkov') {
+    stage('checkov_IAC') {
       steps {
         sh "checkov -s -f main.tf"
       }
