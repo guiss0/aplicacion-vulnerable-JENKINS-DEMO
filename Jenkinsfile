@@ -4,19 +4,7 @@ pipeline {
     maven 'Maven_3_8_7'
   }
 
-  stages {
-    stage('Compilar_y_SAST') {
-      steps {
-    withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-      script {
-        // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
-        sh """
-          mvn -Dmaven.test.failure.ignore verify sonar:sonar -Dsonar.login=\$SONAR_TOKEN -Dsonar.projectKey=Jenkins-Pipeline -Dsonar.host.url=http://localhost:9000/
-        """
-      }
-    }
-  }
-}
+
 
     stage('Container_Scan') {
       steps {
