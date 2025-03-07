@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Compilar_y_SAST') {
       steps {
-    withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+    withCredentials([string(credentialsId: 'SONAR_TOKEN3', variable: 'SONAR_TOKEN3')]) {
       script {
         // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
         sh """
