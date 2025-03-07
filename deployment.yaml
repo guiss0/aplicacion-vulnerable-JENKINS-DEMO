@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miapp
+  template:
+    metadata:
+      labels:
+        app: miapp
+    spec:
+      containers:
+        - name: miapp
+          image: imagen_vulnerable/imagen_vulnerable:latest
+          ports:
+            - containerPort: 80
