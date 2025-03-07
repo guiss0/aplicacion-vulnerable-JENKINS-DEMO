@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-vulnerable
-  labels:
-    app: vulnerable-app
+  name: vulnerables-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vulnerable-app
+      app: vulnerables
   template:
     metadata:
       labels:
-        app: vulnerable-app
+        app: vulnerables
     spec:
       containers:
-      - name: vulnerable-container
-        image: imagen_vulnerable
-        ports:
-        - containerPort: 80
+        - name: vulnerables
+          image: imagen_vulnerable
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
