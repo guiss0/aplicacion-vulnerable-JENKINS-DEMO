@@ -11,7 +11,11 @@ pipeline {
       script {
         // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
         sh """
-          mvn -Dmaven.test.failure.ignore verify sonar:sonar -Dsonar.login=\$SONAR_TOKEN -Dsonar.projectKey=Jenkins-Pipeline -Dsonar.host.url=http://localhost:9000/ -Dmaven-war-plugin.version=3.3.1
+           mvn clean verify sonar:sonar \
+          -Dsonar.projectKey=Jenkins-Pipeline \
+          -Dsonar.projectName='Jenkins-Pipeline' \
+          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.token=$SONAR_TOKEN
         """
       }
     }
