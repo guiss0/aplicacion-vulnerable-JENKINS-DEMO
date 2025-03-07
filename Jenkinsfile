@@ -11,6 +11,7 @@ pipeline {
       script {
         // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
         sh """
+           mvn clean install
            mvn clean verify sonar:sonar \
                       -Dsonar.projectKey=Jenkins-Pipeline \
                       -Dsonar.projectName='Jenkins-Pipeline' \
