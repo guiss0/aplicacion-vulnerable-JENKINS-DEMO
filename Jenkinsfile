@@ -7,13 +7,13 @@ pipeline {
   stages {
     stage('Compilar_y_SAST') {
       steps {
-    withCredentials([string(credentialsId: 'SONAR_TOKEN3', variable: 'SONAR_TOKEN3')]) {
+    withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
       script {
         // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
         sh """
            mvn clean verify sonar:sonar \
-                      -Dsonar.projectKey=$SONAR_TOKEN3 \
-                      -Dsonar.projectName='$SONAR_TOKEN3' \
+                      -Dsonar.projectKey=Jenkins-Pipeline \
+                      -Dsonar.projectName='Jenkins-Pipeline' \
                       -Dsonar.host.url=http://localhost:9000 \
                       -Dsonar.token=$SONAR_TOKEN
         """
