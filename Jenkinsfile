@@ -12,8 +12,8 @@ pipeline {
         // Asegurarse de no mostrar el token en los logs ESCAPANDO EL SECRETO CON \
         sh """
            mvn clean verify sonar:sonar \
-                      -Dsonar.projectKey=$SONAR_TOKEN2 \
-                      -Dsonar.projectName='$SONAR_TOKEN2' \
+                      -Dsonar.projectKey=$SONAR_TOKEN3 \
+                      -Dsonar.projectName='$SONAR_TOKEN3' \
                       -Dsonar.host.url=http://localhost:9000 \
                       -Dsonar.token=$SONAR_TOKEN
         """
