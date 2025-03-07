@@ -33,7 +33,6 @@ pipeline {
               // deployear la pagina web vulnerable
           sh "kubectl apply -f deployment.yaml"
               // por forwarding al puerto 80 la aplicacion web 
-          sh "kubectl port-forward deployment/imagen_vulnerable 80:80"
               
           // Ejecutar el escaneo con Snyk
           sh "snyk container test imagen_vulnerable"
